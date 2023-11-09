@@ -1,0 +1,31 @@
+{{#if user}}
+    <nav class="container-fluid ">
+        <div class="navbar-nav d-flex">
+            <a class="nav-link" href="/home">Productos</a>
+            <a class="nav-link cart" href="/api/carts/{{user.cart}}">Carrito</a>
+            <a class="nav-link" href="/chat">Chat</a>
+            <a class="nav-link" href="/api/users/{{user._id}}/documents">Subir documentos</a>
+            <a class="nav-link" href="/api/users/{{user._id}}/files">Subir archivos</a>
+            <a class="nav-link" href="/api/users/premium/{{user._id}}">Premium</a>
+            <a class="nav-link" href="/auth/logout">Logout</a>
+            <h6>Usuario: {{user.firstName}}</h6>
+            <h6>Last connected: {{user.lastConnection}}</h6>
+        </div>
+    </nav>
+{{/if}}
+
+<div class="container">
+    <h1>BY SOF - SUBIR ARCHIVOS</h1>
+    <form action="/api/users/{{uid}}/files" method="post" enctype="multipart/form-data">
+        <label for="profile">Cargar foto de perfil</label>
+        <input class="form-control-file" type="file" name="profile" id="profile" accept="image/*">
+        <br>
+        <label for="product">Cargar imágen de producto</label>
+        <input class="form-control-file" type="file" name="product" id="product" accept="image/*">
+        <br>
+        <label for="document">Cargar documento</label>
+        <input class="form-control-file" type="file" name="document" id="document" accept=".doc, .docx, .pdf">
+        <br>
+        <button class="btn btn-outline-primary" type="submit">Subir archivos</button>
+    </form>
+</div>

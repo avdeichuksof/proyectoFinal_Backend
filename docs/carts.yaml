@@ -1,0 +1,369 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Obtiene todos los carritos disponibles en la app.
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Operación exitosa!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+    post:
+      summary: Crea un carrito en la app.
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: Carrito creado con éxito!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+  /api/carts/{cid}:
+    get:
+      summary: Obtiene un carrito disponible en la app.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito que se quiere buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Operación exitosa!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de carrito no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+    put:
+      summary: Edita un carrito en la app.
+      tags:
+        - Carts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id del carrito que se quiere editar
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBody/cartBody'
+      responses:
+        "200":
+          description: Carrito editado exitosamente!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de producto no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+    delete:
+      summary: Elimina un carrito de la app.
+      tags:
+        - Carts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id del carrito que se quiere eliminar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Carrito eliminado exitosamente!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de carrito no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+  /api/carts/{cid}/purchases:
+    get:
+      summary: Obtiene las ordenes de compra del carrito solicitado.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito donde se encuentra la orden de compra
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Operación exitosa!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de carrito no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+    delete:
+      summary: Elimina una orden de compra de un carrito.
+      tags:
+        - Carts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id del carrito donde se encuentra la orden de compra
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Ticket eliminado exitosamente!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de carrito no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+  /api/carts/{cid}/purchase:
+    get:
+      summary: Genera una orden de compra en el carrito solicitado.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito donde se quiere realizar la compra
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Operación exitosa!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de carrito no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+  /api/carts/{cid}/product/{pid}:
+    post:
+      summary: Añade un producto a un carrito.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito donde se quiere agregar el producto
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: Id del producto que se quiere agregar al carrito
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Producto añadido al carrito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de carrito o producto no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+  /api/carts/{cid}/products/{pid}:
+    put:
+      summary: Edita la cantidad que hay de un producto en un carrito.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito donde se encuentra el producto
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: Id del producto que se quiere editar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Cantidad editada exitosamente!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de carrito o producto no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+    delete:
+      summary: Elimina un producto de un carrito.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito donde se quiere eliminar el producto
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: Id del producto que se quiere eliminar del carrito
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Producto eliminado al carrito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Cart'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de carrito o producto no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        userId:
+          type: ObjectId
+          description: Id autogenerado por MongoDB del usuario al que pertenece el carrito
+        products:
+          type: Array
+          description: Array que contiene los productos del carrito
+      example:
+        _id: ObjectId("64c2f2f967e15297269d6a73")
+        userId: ObjectId("64c2f2f967e15297269d6a73")
+        products:
+          product:
+            _id: ObjectId("64c2f2f967e15297269d6a73")
+            title: "Bojack Pop Art"
+            description: "Cuadro de Bojack Horseman estilo Pop Art"
+            price: 8000
+            thumbnail: "http://placekitten.com/200/300"
+            code: "cinema3"
+            stock: 10
+            status: true
+            category: "cinema"
+            owner: "creatormail@gmail.com" 
+          quantity: 5
+  requestBody:
+    cartBody:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        userId:
+          type: ObjectId
+          description: Id autogenerado por MongoDB del usuario al que pertenece el carrito
+        products:
+          type: Array
+          description: Array que contiene los productos del carrito
+      example:
+        _id: ObjectId("64c2f2f967e15297269d6a73")
+        userId: ObjectId("64c2f2f967e15297269d6a73")
+        products:
+          product:
+            _id: ObjectId("64c2f2f967e15297269d6a73")
+            title: "Bojack Pop Art"
+            description: "Cuadro de Bojack Horseman estilo Pop Art"
+            price: 8000
+            thumbnail: "http://placekitten.com/200/300"
+            code: "cinema3"
+            stock: 10
+            status: true
+            category: "cinema"
+            owner: "creatormail@gmail.com" 
+          quantity: 5

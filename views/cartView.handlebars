@@ -1,0 +1,43 @@
+{{#if user}}
+    <nav class="container-fluid ">
+        <div class="navbar-nav d-flex">
+            <a class="nav-link" href="/home">Productos</a>
+            <a class="nav-link cart" href="/api/carts/{{user.cart}}">Carrito</a>
+            <a class="nav-link" href="/chat">Chat</a>
+            <a class="nav-link" href="/api/users/{{user._id}}/documents">Subir documentos</a>
+            <a class="nav-link" href="/api/users/{{user._id}}/files">Subir archivos</a>
+            <a class="nav-link" href="/api/users/premium/{{user._id}}">Premium</a>
+            <a class="nav-link" href="/auth/logout">Logout</a>
+            <h6>Usuario: {{user.firstName}}</h6>
+            <h6>Last connected: {{user.lastConnection}}</h6>
+        </div>
+    </nav>
+
+
+    {{#if cart}}
+        <div class="container">
+            <h1>Cart</h1>
+            <p>Cart id: {{cart._id}}</p>
+            {{#each cart.products}}
+                <div class="mb-3 w-50">
+                    <div class="card">
+                        <h5 class="card-header text-center"> {{this.product.title}} </h5>
+                            <img class="card-image" src="{{this.product.thumbnail}}" alt="{{this.product.title}}">
+                            <div class="card-body text-center"> 
+                                <em class="card-title"> {{this.product.description}} </em>
+                                <p class="card-text text-center"> <b> ${{this.product.price}} </b>  </p>
+                                <p class="card-text text-center">{{this.quantity}}</p>
+                                <small class="d-block">id: {{this.product._id}} </small>
+                            </div>
+                    </div>
+                </div>
+            {{/each}}
+
+            <p id="totalValue"><b>Total:</b> {{calculateTotal cart.products}} </p>
+
+            <form action="/api/carts/{{cart._id}}/purchase" method="get">
+                <button id="purchase" type="submit" class="btn btn-success m-2">Comprar</button>
+            </form>
+        </div>
+    {{/if}}
+{{/if}}

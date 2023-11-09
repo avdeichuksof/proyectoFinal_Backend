@@ -1,0 +1,35 @@
+{{#if user}}
+    <nav class="container-fluid ">
+        <div class="navbar-nav d-flex">
+            <a class="nav-link" href="/home">Productos</a>
+            <a class="nav-link cart" href="/api/carts/{{user.cart}}">Carrito</a>
+            <a class="nav-link" href="/chat">Chat</a>
+            <a class="nav-link" href="/api/users/{{user._id}}/documents">Subir documentos</a>
+            <a class="nav-link" href="/api/users/{{user._id}}/files">Subir archivos</a>
+            <a class="nav-link" href="/api/users/premium/{{user._id}}">Premium</a>
+            <a class="nav-link" href="/auth/logout">Logout</a>
+            <h6>Usuario: {{user.firstName}}</h6>
+            <h6>Last connected: {{user.lastConnection}}</h6>
+        </div>
+    </nav>
+{{/if}}
+
+
+<div class="container">
+    <h1 class="text-center">Chat</h1>
+    <div id="messagesBox" class="container text-center"></div>
+    <div>
+        <form id="chat" onsubmit="return addMessage()">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="user" placeholder="Email">
+                </div>
+                <div class="mb-3">
+                <textarea class="form-control" id="text" rows="3" placeholder="Mensaje..."></textarea>
+            </div>
+            <input type="submit" value="Enviar" class="btn btn-primary mb-3">
+        </form>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/chat.js"></script>

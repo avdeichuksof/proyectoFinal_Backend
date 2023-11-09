@@ -1,0 +1,38 @@
+{{#if user}}
+<nav class="container-fluid ">
+    <div class="navbar-nav d-flex">
+        <a class="nav-link" href="/home">Productos</a>
+        <a class="nav-link cart" href="/api/carts/{{user.cart}}">Carrito</a>
+        <a class="nav-link" href="/chat">Chat</a>
+        <a class="nav-link" href="/api/users/{{user._id}}/documents">Subir documentos</a>
+        <a class="nav-link" href="/api/users/{{user._id}}/files">Subir archivos</a>
+        <a class="nav-link" href="/api/users/premium/{{user._id}}">Premium</a>
+        <a class="nav-link" href="/auth/logout">Logout</a>
+        <h6>Usuario: {{user.firstName}}</h6>
+        <h6>Last connected: {{user.lastConnection}}</h6>
+    </div>
+</nav>
+
+        {{#if product}}
+            <div class="container mb-3 w-50">
+                <div class="card">
+                    <h5 class="card-header text-center"> {{product.title}} </h5>
+                    <img class="card-image" src="{{product.thumbnail}}" alt="{{product.title}}">
+                    <div class="card-body text-center">
+                        <em class="card-title"> {{product.description}} </em>
+                        <p class="card-text text-center"> <b> ${{product.price}} </b> </p>
+                        <small class="d-block">id: {{product._id}} </small>
+
+                        {{#if (eq product.stock 0)}}
+                            <p><b>Producto fuera de stock</b></p>
+                        {{else}}
+                            <form action="/api/carts/{{user.cart}}/product/{{product._id}}" method="post">
+                                <input class="form-control m-1" type="number" name="quantity" min="1" max="{{product.stock}}" value="1"/>
+                                <button type="submit" id="addToCartBtn" class="btn btn-success">Agregar al carrito</button>
+                            </form>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+{{/if}}

@@ -1,0 +1,2 @@
+{"level":"fatal","message":" GET at \"http://localhost:8080/loggerTest/\" - at 15:52:37 on 12/9/2023"}
+{"level":"error","message":" GET at \"http://localhost:8080/loggerTest/\" - at 15:52:37 on 12/9/2023"}

@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>REGISTER</h1>
+    <form action="/auth/register" method="post">
+        <label for="">First Name:</label>
+        <input class="form-control" type="text" name="firstName">
+        <label for="">Last Name:</label>
+        <input class="form-control" type="text" name="lastName">
+        <label for="">Email:</label>
+        <input class="form-control" type="email" name="email">
+        <label for="">Password:</label>
+        <input class="form-control" type="password" name="password"> 
+        <label for="">Age:</label>
+        <input class="form-control" type="number" name="age">
+        <br>
+        <input class="btn btn-outline-primary" type="submit" value="Register">
+        <a class="btn btn-outline-success" href="/api/session/login">Login</a>
+    </form>
+
+</div>

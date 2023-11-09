@@ -1,0 +1,228 @@
+paths:
+  /api/products/:
+    get:
+      summary: Obtiene todos los productos disponibles en la app.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Operación exitosa!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+        
+    post:
+      summary: Crea un producto y lo agrega a la app
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBody/productBody'
+      responses:
+        "201":
+          description: Producto creado con éxito!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+
+  /api/products/{id}:
+    get:
+      summary: Obtiene un producto disponible en la app.
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id del producto que se quiere buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Operación exitosa!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de producto no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+    put:
+      summary: Edita un producto en la app.
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id del producto que se quiere editar
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBody/productBody'
+      responses:
+        "200":
+          description: Producto editado exitosamente!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de producto no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+    delete:
+      summary: Elimina un producto de la app.
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id del producto que se quiere eliminar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Producto eliminado exitosamente!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schema/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: Id de producto no encontrado.
+        "500":
+          description: Error en el servidor, no se pudo manejar el proceso.
+
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripción del producto
+        price:
+          type: Number
+          description: Precio del producto
+        thumbnail:
+          type: String
+          description: Url de la imagen del producto
+        code:
+          type: String
+          description: Código diferencial del producto
+        stock:
+          type: Number
+          description: Cantidad que se encuentra en stock del producto
+        status:
+          type: Boolean
+          description: Estado del producto en la app
+        category:
+          type: String
+          description: Categoría del producto
+        owner:
+          type: String
+          description: Email del creador del producto
+          
+      example:
+        _id: ObjectId("64c2f2f967e15297269d6a73")
+        title: "Nombre producto 1"
+        description: "Descripcioón de producto 1"
+        price: 8000
+        thumbnail: "http://placekitten.com/200/300"
+        code: "codigo123"
+        stock: 10
+        status: true
+        category: "categoriaProducto"
+        owner: "owneremail@gmail.com" 
+
+  requestBody:
+    productBody:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripción del producto
+        price:
+          type: Number
+          description: Precio del producto
+        thumbnail:
+          type: String
+          description: Url de la imagen del producto
+        code:
+          type: String
+          description: Código diferencial del producto
+        stock:
+          type: Number
+          description: Cantidad que se encuentra en stock del producto
+        status:
+          type: Boolean
+          description: Estado del producto en la app
+        category:
+          type: String
+          description: Categoría del producto
+        owner:
+          type: String
+          description: Email del creador del producto
+
+      example:
+        _id: ObjectId("64c2f2f967e15297269d6a73")
+        title: "Bojack Pop Art"
+        description: "Cuadro de Bojack Horseman estilo Pop Art"
+        price: 8000
+        thumbnail: "http://placekitten.com/200/300"
+        code: "cinema3"
+        stock: 10
+        status: true
+        category: "cinema"
+        owner: "creatormail@gmail.com" 

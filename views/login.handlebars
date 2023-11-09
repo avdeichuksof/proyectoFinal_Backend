@@ -1,0 +1,18 @@
+<div class="container">
+    <h1>LOGIN</h1>
+    <a class="btn btn-outline-primary" href="http://localhost:8080/auth/github">Log in with Github</a>
+    <form action="/auth/login" method="post">
+        <label for="">Email: </label>
+        <input class="form-control" type="email" name="email">
+
+        <label for="">Password: </label>
+        <input class="form-control" type="password" name="password">
+        <br>
+        <a type="button" class="btn btn-outline-danger" href="/api/session/forgottenpassword">Olvidé mi contraseña</a>
+
+        <br> <br>
+        <input class="btn btn-outline-primary" type="submit" value="Log in">
+        <a class="btn btn-outline-success" href="/api/session/register">Register</a>
+    </form>
+
+</div>

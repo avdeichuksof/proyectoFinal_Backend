@@ -1,0 +1,33 @@
+{{#if user}}
+    <nav class="container-fluid ">
+        <div class="navbar-nav d-flex">
+            <a class="nav-link" href="/home">Productos</a>
+            <a class="nav-link cart" href="/api/carts/{{user.cart}}">Carrito</a>
+            <a class="nav-link" href="/chat">Chat</a>
+            <a class="nav-link" href="/api/users/{{user._id}}/documents">Subir documentos</a>
+            <a class="nav-link" href="/api/users/{{user._id}}/files">Subir archivos</a>
+            <a class="nav-link" href="/api/users/premium/{{user._id}}">Premium</a>
+            <a class="nav-link" href="/auth/logout">Logout</a>
+            <h6>Usuario: {{user.firstName}}</h6>
+            <h6>Last connected: {{user.lastConnection}}</h6>
+        </div>
+    </nav>
+{{/if}}
+
+<div class="container">
+    <h1>BY SOF - SUBIR DOCUMENTOS PARA USUARIO PREMIUM</h1>
+
+        <form action="/api/users/{{uid}}/documents" method="post" enctype="multipart/form-data">
+            <label for="dni">Cargar DNI</label>
+            <input class="form-control"type="file" name="dni" id="dni" accept="image/*, .pdf">
+            <br>
+            <label for="address">Cargar comprobante de domicilio</label>
+            <input class="form-control"type="file" name="address" id="address" accept="image/*, .pdf">
+            <br>
+            <label for="accountStatus">Cargar comprobante de estado de cuenta</label>
+            <input class="form-control"type="file" name="accountStatus" id="accountStatus" accept="image/*, .pdf">
+            <br>
+            <button class="btn btn-primary" type="submit">Subir documentos</button>
+        </form>
+
+</div>
